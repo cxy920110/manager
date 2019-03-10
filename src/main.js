@@ -11,6 +11,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
 
+import axios from './lib/http'
+Vue.use(axios);
+
 new Vue({
   render: h => h(App),
   router

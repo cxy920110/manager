@@ -1,4 +1,5 @@
 <template>
+
     <div class="login">
         
        <el-form :model="formdata" label-position='top' status-icon :rules="rules" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
@@ -28,12 +29,12 @@ export default {
         },
          rules: {
           username: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'change' }
+            { required: true, message: '请输入用户名', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 8 个字符', trigger: 'change' }
           ],
           password: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'change' }
+            { required: true, message: '请输入密码', trigger: 'blur' },
+            { min: 6, max: 18, message: '长度在 6 到 18 个字符', trigger: 'change' }
           ],
         }
     }
@@ -43,6 +44,15 @@ export default {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             // alert('submit!');
+            this.$http.post('login',this.formdata).then(res=>{
+                if(res.data.meta.status ===  400){
+                    this.$message.error(res.data.meta.msg)
+                }else{
+                    this.$message.success(res.data.meta.msg)
+                    window.sessionStorage.setItem('token',res.data.data.token)
+                    this.$router.push('/')
+                }
+            })
           } else {
             // console.log('error submit!!');
             this.$message.error('请输入正确的用户名和密码')
