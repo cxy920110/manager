@@ -46,16 +46,16 @@ export default {
             // alert('submit!');
             this.$http.post('login',this.formdata).then(res=>{
                 if(res.data.meta.status ===  400){
-                    this.$message.error(res.data.meta.msg)
+                    // this.$message.error(res.data.meta.msg)
                 }else{
-                    this.$message.success(res.data.meta.msg)
+                    // this.$message.success(res.data.meta.msg)
                     window.sessionStorage.setItem('token',res.data.data.token)
                     this.$router.push('/')
                 }
             })
           } else {
             // console.log('error submit!!');
-            this.$message.error('请输入正确的用户名和密码')
+            // this.$message.error('请输入正确的用户名和密码')
             return false
           }
         });

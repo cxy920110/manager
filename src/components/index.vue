@@ -8,21 +8,31 @@
 </el-row>
   </el-header>
   <el-container>
-    <el-aside width="200px" class="index-aside">Aside</el-aside>
-    <el-main class="index-main">Main</el-main>
+    <el-aside width="200px" class="index-aside">
+       <el-menu
+      default-active="2"
+      router
+      class="el-menu-vertical-demo"
+      >
+      <el-submenu index="1">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>用户管理</span>
+        </template>
+          <el-menu-item index="users"><span class="el-icon-menu"></span>用户列表</el-menu-item>
+      </el-submenu>
+      
+    </el-menu>
+    </el-aside>
+    <el-main class="index-main">
+      <router-view></router-view>
+    </el-main>
   </el-container>
 </el-container>
 </template>
 <script>
 export default {
-    beforeCreate() {
-      if(window.sessionStorage.getItem('token')){
-
-      }else{
-        this.$message.warning('不能进去')
-        this.$router.push('/login')
-      }
-    },
+    
     methods: {
       logout(){
         this.$confirm('你确定要退出吗', '提示', {
@@ -60,11 +70,12 @@ font-weight: 700;
 .header-right{
     text-align: right;
 }
-.index-aside{
+/* .index-aside{
 
-}
-.index-main{
+} */
+.el-main.index-main{
     background-color: #E9EEF3;
+    padding-top: 0;
 }
 </style>
 
